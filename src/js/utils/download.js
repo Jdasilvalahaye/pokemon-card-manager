@@ -1,4 +1,4 @@
-import { ebZenithSupreme } from "../extensions/epeeBouclier/ebZenithSupreme.js";
+import { ebTempeteArgentee } from "../extensions/epeeBouclier/eb12TempeteArgentee.js";
 import axios from "axios";
 import fs from "fs";
 import path from "path";
@@ -40,7 +40,7 @@ const downloadImage = async (url, outputPath) => {
 
 // Télécharger toutes les images des cartes du set
 (async () => {
-  for (const card of ebZenithSupreme.cards) {
+  for (const card of ebTempeteArgentee.cards) {
     const fileName = `${card.id}-${card.name.replace(/ /g, "_")}.webp`;
     const outputPath = path.join(assetsDir, fileName);
 

@@ -1,5 +1,6 @@
 import { ebTenebresEmbrasees } from "/src/js/extensions/epeeBouclier/eb3TenebresEmbrasees.js";
 import { ebZenithSupreme } from "/src/js/extensions/epeeBouclier/eb12.5ZenithSupreme.js";
+import { ebTempeteArgentee } from "/src/js/extensions/epeeBouclier/eb12TempeteArgentee.js";
 
 // Tout se charge sur index.html
 
@@ -42,6 +43,9 @@ function loadExtension(extensionName) {
   } else if (extensionName === "ebZenithSupreme") {
     renderCards(ebZenithSupreme.cards, "grid-view", "/assets/epeeBouclier/eb12.5ZenithSupreme");
     updateExtensionTitle("Épée et Bouclier - Zénith Suprême");
+  } else if (extensionName === "ebTempeteArgentee") {
+    renderCards(ebTempeteArgentee.cards, "grid-view", "/assets/epeeBouclier/eb12TempeteArgentee");
+    updateExtensionTitle("Épée et Bouclier - Tempête Argentée");
   }
 }
 
