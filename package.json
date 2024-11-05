@@ -1,0 +1,11 @@
+{
+  "name": "pokemon-card-manager",
+  "version": "1.0.0",
+  "description": "Projet d'apprentissage autodicate d'affichage de cartes pokemon. Utilise les api de TCGdex pour obtenir de la donnée",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jonathan Dasilva Lahaye",
+  "license": "ISC"
+}
