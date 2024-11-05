@@ -37,13 +37,13 @@ function updateExtensionTitle(title) {
 
 // Fonction pour charger l'extension en fonction de l'URL
 function loadExtension(extensionName) {
-  if (extensionName === "ebTenebresEmbrasees") {
+  if (extensionName === "Tenebres-Embrasees") {
     renderCards(ebTenebresEmbrasees.cards, "grid-view", "/assets/epeeBouclier/eb3TenebresEmbrasees");
     updateExtensionTitle("Épée et Bouclier - Ténèbres Embrasées");
-  } else if (extensionName === "ebZenithSupreme") {
+  } else if (extensionName === "Zenith-Supreme") {
     renderCards(ebZenithSupreme.cards, "grid-view", "/assets/epeeBouclier/eb12.5ZenithSupreme");
     updateExtensionTitle("Épée et Bouclier - Zénith Suprême");
-  } else if (extensionName === "ebTempeteArgentee") {
+  } else if (extensionName === "Tempete-Argentee") {
     renderCards(ebTempeteArgentee.cards, "grid-view", "/assets/epeeBouclier/eb12TempeteArgentee");
     updateExtensionTitle("Épée et Bouclier - Tempête Argentée");
   }
