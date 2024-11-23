@@ -43,6 +43,6 @@ li{
     margin-bottom: 20px;
 }
 
-.card:hover{
+.card-image:hover{
     transform: scale(1.2);
 }

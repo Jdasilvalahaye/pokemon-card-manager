@@ -1,8 +1,10 @@
 import { ebTenebresEmbrasees } from "/src/js/extensions/epeeBouclier/eb3TenebresEmbrasees.js";
 import { ebZenithSupreme } from "/src/js/extensions/epeeBouclier/eb12.5ZenithSupreme.js";
 import { ebTempeteArgentee } from "/src/js/extensions/epeeBouclier/eb12TempeteArgentee.js";
-
-// Tout se charge sur index.html
+import { ev151 } from "/src/js/extensions/ecarlateViolet/ev3.5Pokemon151.js";
+import { evFlammesObsidiennes } from "/src/js/extensions/ecarlateViolet/ev3FlammesObsidiennes.js";
+import { evFailleParadoxe } from "/src/js/extensions/ecarlateViolet/ev4FailleParadoxe.js";
+// Tout se charge sur collection.html
 
 // Fonction pour afficher les cartes
 function renderCards(cards, gridId, assetsPath) {
@@ -46,6 +48,15 @@ function loadExtension(extensionName) {
   } else if (extensionName === "Tempete-Argentee") {
     renderCards(ebTempeteArgentee.cards, "grid-view", "/assets/epeeBouclier/eb12TempeteArgentee");
     updateExtensionTitle("Épée et Bouclier - Tempête Argentée");
+  } else if (extensionName === "Faille-Paradoxe") {
+    renderCards(evFailleParadoxe.cards, "grid-view", "/assets/ecarlateViolet/ev4FailleParadoxe");
+    updateExtensionTitle("Écarlate et Violet - Faille Paradoxe");
+  } else if (extensionName === "Flammes-Obsidiennes") {
+    renderCards(evFlammesObsidiennes.cards, "grid-view", "/assets/ecarlateViolet/ev3FlammesObsidiennes");
+    updateExtensionTitle("Écarlate et Violet - Flammes Obsidiennes");
+  } else if (extensionName === "Pokemon-151") {
+    renderCards(ev151.cards, "grid-view", "/assets/ecarlateViolet/ev3.5Pokemon151");
+    updateExtensionTitle("Écarlate et Violet - 151");
   }
 }
 

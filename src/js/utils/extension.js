@@ -7,8 +7,8 @@ const tcgdex = new TCGdex("fr");
 // Entrer dans un contexte async
 (async () => {
   try {
-    // Récupérer les informations du set "swsh3" (Ténèbres Embrasées)
-    const set = await tcgdex.fetch("sets", "swsh12");
+    // Récupérer les informations du set
+    const set = await tcgdex.fetch("sets", "sv04");
 
     // Modifier l'URL de l'image pour chaque carte du set
     const modifiedCards = set.cards.map((card) => {
@@ -19,13 +19,13 @@ const tcgdex = new TCGdex("fr");
     });
 
     // Créer le contenu à écrire dans le fichier JavaScript
-    const fileContent = `export const ebTempeteArgentee = {
+    const fileContent = `export const evFailleParadoxe = {
   cardCount: ${JSON.stringify(set.cardCount, null, 2)},
   cards: ${JSON.stringify(modifiedCards, null, 2)}
 };`;
 
     // Écrire les cartes modifiées dans un fichier JavaScript
-    fs.writeFile("eb12TempeteArgentee.js", fileContent, (err) => {
+    fs.writeFile("ev4FailleParadoxe.js", fileContent, (err) => {
       if (err) {
         console.error("Erreur lors de l'écriture du fichier JavaScript :", err);
       } else {
