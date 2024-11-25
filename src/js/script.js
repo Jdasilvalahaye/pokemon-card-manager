@@ -4,6 +4,9 @@ import { ebTempeteArgentee } from "/src/js/extensions/epeeBouclier/eb12TempeteAr
 import { ev151 } from "/src/js/extensions/ecarlateViolet/ev3.5Pokemon151.js";
 import { evFlammesObsidiennes } from "/src/js/extensions/ecarlateViolet/ev3FlammesObsidiennes.js";
 import { evFailleParadoxe } from "/src/js/extensions/ecarlateViolet/ev4FailleParadoxe.js";
+
+// Défini dès le début la liste des cartes comme étant égale aux données du localstorage, sinon c'est un tableau vide. Utilise getItem pour aller chercher la valeur associée à listOfcardsOwned qu'on défini dans la fonction du bouton, qui elle utilise la méthode setItem pour ajouter au local storage la liste des cartes
+let listOfCardsOwned = JSON.parse(localStorage.getItem("listOfCardsOwned")) || [];
 // Tout se charge sur collection.html
 
 // Fonction pour afficher les cartes
@@ -16,15 +19,67 @@ function renderCards(cards, gridId, assetsPath) {
     newCard.classList.add("card");
     newCard.id = card.id;
 
+    // Conteneur de l'image
+    const imageContainer = document.createElement("div");
+    imageContainer.classList.add("card-image-container");
+
+    // Image de la carte
     const imageElement = document.createElement("img");
     const imageName = `${card.id}-${card.name.replace(/ /g, "_")}.webp`;
     imageElement.src = `${assetsPath}/${imageName}`;
     imageElement.alt = card.name;
     imageElement.classList.add("card-image");
 
-    newCard.appendChild(imageElement);
+    // Ajout du conteneur du bouton
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("card-button-container");
+
+    // Ajout du bouton de collection
+    const ownedButton = document.createElement("button");
+    ownedButton.classList.add("collection-button");
+    ownedButton.textContent = "non possédée"; // pour chaque carte, par défaut le bouton est sur non possédée
+
+    // si la liste (le localstorage) contient l'id de la carte, alors met le bouton sur possédée à chaque fois qu'on charge la carte, sinon reste sur non possédée, idem pour les classes
+    if (listOfCardsOwned.includes(card.id)) {
+      ownedButton.textContent = "possédée";
+      ownedButton.classList.add("owned");
+    } else {
+      ownedButton.textContent = "non possédée";
+      ownedButton.classList.add("not-owned");
+    }
+    // Quand clique sur bouton, lance la fonction
+    ownedButton.addEventListener("click", () => {
+      ownedButtonCollecion(card.id, ownedButton);
+    });
+
+    // Ajout du bouton au conteneur du bouton
+    buttonContainer.appendChild(ownedButton);
+    // Ajout des conteneurs à la carte
+    newCard.appendChild(imageContainer);
+    newCard.appendChild(buttonContainer);
+    // Ajout de l'image au conteneur
+    imageContainer.appendChild(imageElement);
+    // Ajout de la carte à la grille
     grid.appendChild(newCard);
   });
+}
+// Fonction du bouton : si quand on clique le texte = non possédée, devient "possédée" et ajoute l'id de la carte dans la liste, sinon, remet sur "non possédée" et retire l'id de la liste
+// Les boutons ont deux classes : collection-button et owned ou not-owned dès qu'on intéragit avec. La classe est conservées plus haut à chaque refresh.
+// On change la classe dans la fonction renderCards uniquement pour la conserver après refresh et dans cette fonction pour changer la classe au clic. Si on ne le fait pas ici, il faudrait refresh pour que le bouton prenne sa seconde classe
+function ownedButtonCollecion(cardId, button) {
+  if (button.textContent == "non possédée") {
+    button.textContent = "possédée";
+    button.classList.add("owned");
+    button.classList.remove("not-owned");
+    listOfCardsOwned.push(cardId); // ajoute la carte à la liste
+  } else {
+    button.textContent = "non possédée";
+    button.classList.add("not-owned");
+    button.classList.remove("owned");
+    listOfCardsOwned = listOfCardsOwned.filter((id) => id !== cardId); // retire de la liste la carte
+  }
+  localStorage.setItem("listOfCardsOwned", JSON.stringify(listOfCardsOwned)); // ajoute au localstorage la liste des cartes à laquelle on ajoute ou retire un id en fonction du texte du bouton
+  console.log(listOfCardsOwned);
 }
 
 // Fonction pour mettre à jour le titre de l'extension

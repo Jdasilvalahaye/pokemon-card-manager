@@ -32,17 +32,59 @@ li{
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-#card {
-    width: 80px;
-    height: 80px;
+.card {
+    display: flex;
+    flex-direction: column; /* Empile verticalement */
+    align-items: center; /* Centre le contenu horizontalement */
+    background-color: #f8f8f8; /* Couleur de fond claire */
+    border: 1px solid #ddd; /* Bordure légère */
+    border-radius: 10px; /* Coins arrondis */
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre douce */
+    width: 220px;
+    margin: 15px;
 }
 
+.card-image-container {
+    position: relative; /* Nécessaire pour ajouter des superpositions à l’avenir */
+  }
+
 .card-image {
-    width: 220px;
-    height: 280px;
-    margin-bottom: 20px;
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Coins arrondis pour l'image */
+    margin-bottom: 10px; /* Espacement avec le bouton */
+    transition: transform 0.2s ease-in-out; /* Animation au survol */
 }
 
 .card-image:hover{
-    transform: scale(1.2);
+    transform: scale(1.05);
 }
+
+.collection-button{
+    display: inline-block;
+    width: 100%; /* Largeur du bouton */
+    padding: 8px 15px; /* Espacement interne */
+    font-size: 14px; /* Taille de police */
+    font-weight: bold; /* Texte en gras */
+    color: white;
+    text-align: center;
+    border: none; /* Pas de bordure */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out; /* Transition fluide */
+}
+/* Bouton pour les cartes non possédées */
+.not-owned {
+    background-color: rgba(208, 77, 77, 0.8);
+  }
+  
+/* Bouton pour les cartes possédées */
+.owned {
+    background-color: rgba(84, 128, 103, 0.8); 
+  }
+
+.collection-button:hover {
+    transform: translateY(-2px); /* Légère élévation au survol */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre accentuée */
+  }
