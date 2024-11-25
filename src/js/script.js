@@ -52,13 +52,13 @@ function renderCards(cards, gridId, assetsPath) {
       ownedButtonCollecion(card.id, ownedButton);
     });
 
-    // Ajout du bouton au conteneur du bouton
-    buttonContainer.appendChild(ownedButton);
     // Ajout des conteneurs à la carte
     newCard.appendChild(imageContainer);
     newCard.appendChild(buttonContainer);
     // Ajout de l'image au conteneur
     imageContainer.appendChild(imageElement);
+    // Ajout du bouton au conteneur du bouton
+    buttonContainer.appendChild(ownedButton);
     // Ajout de la carte à la grille
     grid.appendChild(newCard);
   });
