@@ -30,6 +30,10 @@ function renderCards(cards, gridId, assetsPath) {
     imageElement.alt = card.name;
     imageElement.classList.add("card-image");
 
+    // Si la carte n'est pas possédée, ajoute la classe "not-owned" pour modifier l'opacité en css
+    if (!listOfCardsOwned.includes(card.id)) {
+      imageElement.classList.add("not-owned");
+    }
     // Ajout du conteneur du bouton
     const buttonContainer = document.createElement("div");
     buttonContainer.classList.add("card-button-container");
@@ -49,7 +53,7 @@ function renderCards(cards, gridId, assetsPath) {
     }
     // Quand clique sur bouton, lance la fonction
     ownedButton.addEventListener("click", () => {
-      ownedButtonCollecion(card.id, ownedButton);
+      ownedButtonCollecion(card.id, ownedButton, imageElement);
     });
 
     // Ajout des conteneurs à la carte
@@ -65,17 +69,19 @@ function renderCards(cards, gridId, assetsPath) {
 }
 // Fonction du bouton : si quand on clique le texte = non possédée, devient "possédée" et ajoute l'id de la carte dans la liste, sinon, remet sur "non possédée" et retire l'id de la liste
 // Les boutons ont deux classes : collection-button et owned ou not-owned dès qu'on intéragit avec. La classe est conservées plus haut à chaque refresh.
-// On change la classe dans la fonction renderCards uniquement pour la conserver après refresh et dans cette fonction pour changer la classe au clic. Si on ne le fait pas ici, il faudrait refresh pour que le bouton prenne sa seconde classe
-function ownedButtonCollecion(cardId, button) {
+// On change la classe dans la fonction renderCards uniquement pour la conserver après refresh et dans cette fonction pour changer la classe au clic. Si on ne le fait pas ici, il faudrait refresh pour que le bouton prenne sa seconde classe. Change également la classe de l'image pour modifier l'opacité
+function ownedButtonCollecion(cardId, button, imageElement) {
   if (button.textContent == "non possédée") {
     button.textContent = "possédée";
     button.classList.add("owned");
     button.classList.remove("not-owned");
+    imageElement.classList.remove("not-owned");
     listOfCardsOwned.push(cardId); // ajoute la carte à la liste
   } else {
     button.textContent = "non possédée";
     button.classList.add("not-owned");
     button.classList.remove("owned");
+    imageElement.classList.add("not-owned");
     listOfCardsOwned = listOfCardsOwned.filter((id) => id !== cardId); // retire de la liste la carte
   }
   localStorage.setItem("listOfCardsOwned", JSON.stringify(listOfCardsOwned)); // ajoute au localstorage la liste des cartes à laquelle on ajoute ou retire un id en fonction du texte du bouton

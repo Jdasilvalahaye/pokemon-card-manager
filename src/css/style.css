@@ -55,8 +55,13 @@ li{
     border-radius: 8px; /* Coins arrondis pour l'image */
     margin-bottom: 10px; /* Espacement avec le bouton */
     transition: transform 0.2s ease-in-out; /* Animation au survol */
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
+.card-image.not-owned{
+    opacity: 0.4;
+}
 .card-image:hover{
     transform: scale(1.05);
 }
