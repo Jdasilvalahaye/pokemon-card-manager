@@ -152,3 +152,34 @@ window.addEventListener("popstate", (event) => {
     loadExtension(event.state.extension);
   }
 });
+
+// Gère l'affichage des sous-menus
+document.addEventListener("DOMContentLoaded", () => {
+  // Sélectionne tous les toggles du menu
+  const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
+
+  dropdownToggles.forEach((toggle) => {
+    toggle.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      // Fermer tous les autres menus déroulants
+      document.querySelectorAll(".menu-item").forEach((item) => {
+        if (item !== toggle.parentElement) {
+          item.classList.remove("active");
+        }
+      });
+
+      // Bascule l'état du menu courant
+      toggle.parentElement.classList.toggle("active");
+    });
+  });
+
+  // Fermer le menu si on clique en dehors
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest(".menu-item")) {
+      document.querySelectorAll(".menu-item").forEach((item) => {
+        item.classList.remove("active");
+      });
+    }
+  });
+});
